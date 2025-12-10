@@ -1,2 +1,2 @@
 # WebtechLab
-List of all experiments for webtech lab
+The experiments are located in their respective Lab folders (Lab1 - Lab10).
