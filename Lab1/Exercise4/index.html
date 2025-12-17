@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Card Exercise</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Card Container */
+        .product-card {
+            background-color: #ffffff;
+            width: 300px;
+            border-radius: 12px;
+            overflow: hidden; /* Ensures image stays within border radius */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Requirement: Box-shadow */
+            border: 1px solid #e1e4e8; /* Requirement: Borders */
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Product Image */
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Card Content */
+        .card-details {
+            padding: 20px; /* Requirement: Padding */
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px; /* Requirement: Margins */
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Price and Action */
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #10b981; /* Emerald green for price */
+        }
+
+        /* Button Styling */
+        .buy-btn {
+            background-color: #4f46e5; /* Indigo */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease; /* Requirement: Hover effects */
+        }
+
+        .buy-btn:hover {
+            background-color: #4338ca; /* Darker Indigo */
+        }
+
+        .buy-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" alt="Premium Wireless Headphones" class="product-image">
+        
+        <div class="card-details">
+            <h2 class="product-title">Premium Headphones</h2>
+            <p class="product-description">
+                Immerse yourself in high-fidelity sound with active noise cancellation and 30-hour battery life.
+            </p>
+            
+            <div class="card-footer">
+                <span class="price">$299</span>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

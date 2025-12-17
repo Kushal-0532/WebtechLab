@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f5f0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .contact-container {
+            background-color: #fafaf8;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(65, 105, 80, 0.1);
+            width: 100%;
+            max-width: 500px;
+            border-top: 4px solid #415950;
+        }
+
+        h1 {
+            color: #415950;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #415950;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d4d4ce;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            background-color: #fff;
+            color: #333;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #415950;
+            box-shadow: 0 0 5px rgba(65, 105, 80, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #004225; /* British Racing Green */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: not-allowed;
+            transition: background-color 0.3s;
+            opacity: 0.5; /* Greyed out */
+        }
+
+        button.enabled {
+            cursor: pointer;
+            opacity: 1; /* Enabled */
+        }
+
+        button:hover.enabled {
+            background-color: #00331a; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+        <h1>Simple Form</h1>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <button type="submit" id="submitButton" disabled>Submit</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const submitButton = document.getElementById('submitButton');
+
+        form.addEventListener('input', () => {
+            const isFormValid = form.checkValidity();
+            submitButton.disabled = !isFormValid;
+            submitButton.classList.toggle('enabled', isFormValid);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            /* High contrast gradient: Pink/Red to Blue */
+            background: linear-gradient(135deg, #FC466B 0%, #3F5EFB 100%);
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 450px;
+            /* Solid white background */
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.9rem;
+        }
+        .input-wrapper {
+            position: relative;
+        }
+        .input-wrapper i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="tel"],
+        input[type="password"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            /* Light grey background for inputs */
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            color: #333;
+        }
+        input[type="file"] {
+            padding-left: 12px;
+        }
+        /* Placeholder styling */
+        ::placeholder {
+            color: #aaa;
+        }
+        /* Reset date icon color */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            filter: none;
+        }
+        input:focus {
+            outline: none;
+            background: #fff;
+            border-color: #3F5EFB;
+            box-shadow: 0 0 0 4px rgba(63, 94, 251, 0.1);
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+            accent-color: #3F5EFB;
+        }
+        button {
+            /* Green button to stand out from background */
+            background: #28a745;
+            color: #ffffff;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        button:hover:not(:disabled) {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create Account</h2>
+    <form action="#" method="POST">
+        <div class="input-group">
+            <label for="fullname">Full Name</label>
+            <div class="input-wrapper">
+                <i class="fas fa-user"></i>
+                <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="email">Email Address</label>
+            <div class="input-wrapper">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="dob">Date of Birth</label>
+            <div class="input-wrapper">
+                <i class="fas fa-calendar"></i>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="phone">Phone Number</label>
+            <div class="input-wrapper">
+                <i class="fas fa-phone"></i>
+                <input type="tel" id="phone" name="phone" placeholder="+1 234 567 8900">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="confirm-password">Confirm Password</label>
+            <div class="input-wrapper">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••" required>
+            </div>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms" style="margin-bottom: 0; font-weight: normal;">I agree to the Terms & Conditions</label>
+        </div>
+
+        <button type="submit">Register Now</button>
+    </form>
+</div>
+
+</body>
+</html>

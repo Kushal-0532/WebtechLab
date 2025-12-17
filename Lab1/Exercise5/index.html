@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>My Portfolio</title>
+		<style>
+			/* Reset and Base Styles */
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+				line-height: 1.6;
+				color: #333;
+				background-color: #f9fafb;
+			}
+
+			/* Header Styling */
+			header {
+				background-color: #2563eb; /* Royal Blue */
+				color: white;
+				text-align: center;
+				padding: 60px 20px;
+				margin-bottom: 40px;
+			}
+
+			header h1 {
+				font-size: 2.5rem;
+				margin-bottom: 10px;
+			}
+
+			header p {
+				font-size: 1.2rem;
+				opacity: 0.9;
+				font-weight: 300;
+			}
+
+			/* Main Container */
+			.container {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 0 20px;
+			}
+
+			/* Section Styling */
+			section {
+				background: white;
+				padding: 30px;
+				margin-bottom: 30px;
+				border-radius: 8px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+				border: 1px solid #e5e7eb;
+			}
+
+			h2 {
+				color: #1f2937;
+				border-bottom: 2px solid #2563eb;
+				display: inline-block;
+				padding-bottom: 5px;
+				margin-bottom: 20px;
+			}
+
+			/* Skills List Styling */
+			.skills-list {
+				list-style: none;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+			}
+
+			.skills-list li {
+				background-color: #eff6ff;
+				color: #1d4ed8;
+				padding: 8px 16px;
+				border-radius: 20px;
+				font-weight: 500;
+				font-size: 0.9rem;
+			}
+
+			/* Projects Styling */
+			.project-item {
+				margin-bottom: 20px;
+				padding-bottom: 20px;
+				border-bottom: 1px solid #eee;
+			}
+
+			.project-item:last-child {
+				border-bottom: none;
+				margin-bottom: 0;
+				padding-bottom: 0;
+			}
+
+			.project-title {
+				font-size: 1.2rem;
+				font-weight: 600;
+				margin-bottom: 5px;
+				color: #111;
+			}
+
+			/* Footer Styling */
+			footer {
+				text-align: center;
+				padding: 40px 20px;
+				background-color: #1f2937;
+				color: #9ca3af;
+				margin-top: 60px;
+			}
+
+			footer a {
+				color: white;
+				text-decoration: none;
+			}
+
+			footer a:hover {
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>Kushal Veerapaneni</h1>
+			<p>AI/ML Student & Researcher</p>
+		</header>
+
+		<div class="container">
+			<!-- About Me Section -->
+			<section id="about">
+				<h2>About Me</h2>
+				<p>
+					I am from Hyderabad, currently studying at VIT AP with a
+					specialization in AI & ML. I am very passionate about the ML field and
+					wish to pursue a career in research.
+				</p>
+			</section>
+
+			<!-- Skills Section -->
+			<section id="skills">
+				<h2>Skills</h2>
+				<ul class="skills-list">
+					<li>Linux</li>
+					<li>Sklearn</li>
+					<li>Transformers</li>
+					<li>Spacy</li>
+					<li>Unsloth</li>
+					<li>Streamlit</li>
+					<li>Langchain</li>
+				</ul>
+			</section>
+
+			<!-- Projects Section -->
+			<section id="projects">
+				<h2>Projects</h2>
+
+				<div class="project-item">
+					<div class="project-title">Anime Character Guesser</div>
+					<p>
+						A primitive form of Akinator for guessing anime characters using
+						decision trees and KNNs.
+					</p>
+				</div>
+
+				<div class="project-item">
+					<div class="project-title">LLM Fine-tuning</div>
+					<p>Fine-tuned small LLMs for poetry and sarcasm generation.</p>
+				</div>
+			</section>
+		</div>
+
+		<footer>
+			<p>
+				Contact me at:
+				<a href="mailto:kushal@example.com">kushal@example.com</a>
+			</p>
+			<p>&copy; 2025 Kushal Veerapaneni</p>
+		</footer>
+	</body>
+</html>
