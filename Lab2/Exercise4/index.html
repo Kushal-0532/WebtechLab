@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>
+			Lab 2 - Exercise 4: Advanced Local Storage User Management System
+		</title>
+		<style>
+			:root {
+				color-scheme: light dark;
+				--bg: #0b0b10;
+				--panel: #111322;
+				--muted: #8a8fa3;
+				--accent: #6aa1ff;
+				--danger: #ff6b6b;
+				--success: #4cd97b;
+			}
+			body {
+				margin: 0;
+				font-family:
+					system-ui,
+					-apple-system,
+					Segoe UI,
+					Roboto,
+					Ubuntu,
+					Cantarell,
+					Arial,
+					"Noto Sans";
+				background: linear-gradient(
+					135deg,
+					#1e1b4b 0%,
+					#2e1065 50%,
+					#0f172a 100%
+				);
+				min-height: 100vh;
+				display: flex;
+				justify-content: center;
+				color: #e9ebf1;
+			}
+			.container {
+				width: 100%;
+				max-width: 1100px;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				padding: 1rem;
+				box-sizing: border-box;
+			}
+			h1 {
+				text-align: center;
+				font-size: clamp(1.6rem, 3vw, 2.1rem);
+				letter-spacing: 0.3px;
+				margin: 0 0 1rem;
+			}
+			.content {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+
+			.grid {
+				display: grid;
+				grid-template-columns: 360px 1fr;
+				gap: 1rem;
+			}
+			@media (max-width: 900px) {
+				.grid {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			.panel {
+				background: var(--panel);
+				border: 1px solid #ffffff18;
+				border-radius: 0.9rem;
+				padding: 1rem;
+			}
+			.panel h2 {
+				margin: 0.25rem 0 0.75rem;
+				font-size: 1rem;
+				color: #d7dbeb;
+			}
+
+			form {
+				display: grid;
+				gap: 0.75rem;
+			}
+			label {
+				display: grid;
+				gap: 0.35rem;
+				font-size: 0.9rem;
+				color: #cfd3e6;
+			}
+			input[type="text"],
+			input[type="email"],
+			input[type="tel"],
+			input[type="password"] {
+				padding: 0.6rem 0.75rem;
+				border-radius: 0.5rem;
+				border: 1px solid #ffffff22;
+				background: #0f1120;
+				color: #e9ebf1;
+			}
+			.actions {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+				margin-top: 0.25rem;
+			}
+			button {
+				padding: 0.55rem 0.9rem;
+				border-radius: 0.5rem;
+				border: 1px solid #ffffff22;
+				background: #101329;
+				color: #e9ebf1;
+				cursor: pointer;
+			}
+			.primary {
+				background: #13214a;
+				border-color: #6aa1ff55;
+			}
+			.danger {
+				background: #35181a;
+				border-color: #ff6b6b55;
+			}
+
+			.hint {
+				font-size: 0.85rem;
+				color: var(--muted);
+				min-height: 1.2rem;
+			}
+			.hint.error {
+				color: var(--danger);
+			}
+			.hint.success {
+				color: var(--success);
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			thead th {
+				text-align: left;
+				font-weight: 600;
+				color: #cfd3e6;
+				font-size: 0.95rem;
+				padding: 0.6rem 0.5rem;
+				border-bottom: 1px solid #ffffff18;
+			}
+			tbody td {
+				padding: 0.6rem 0.5rem;
+				border-bottom: 1px solid #ffffff0f;
+				color: #e5e8f5;
+			}
+			tbody tr:hover {
+				background: #0f1226;
+			}
+			.empty {
+				color: var(--muted);
+				padding: 0.8rem 0.5rem;
+			}
+		</style>
+	</head>
+	<body>
+		<main class="container">
+			<h1>Exercise 4: Advanced LocalStorage User Management</h1>
+			<div class="content">
+				<div class="grid">
+					<section class="panel">
+						<h2>Register User</h2>
+						<form id="regForm" novalidate>
+							<label
+								>Name
+								<input id="name" type="text" required placeholder="Jane Doe" />
+							</label>
+							<label
+								>Email
+								<input
+									id="email"
+									type="email"
+									required
+									placeholder="jane@example.com"
+								/>
+							</label>
+							<label
+								>Mobile Number
+								<input
+									id="mobile"
+									type="tel"
+									required
+									placeholder="10-digit number"
+									pattern="\\d{10}"
+								/>
+							</label>
+							<label
+								>Password
+								<input
+									id="password"
+									type="password"
+									required
+									minlength="6"
+									placeholder="Minimum 6 characters"
+								/>
+							</label>
+							<div class="actions">
+								<button class="primary" type="submit">Submit</button>
+								<button class="danger" id="clearAll" type="button">
+									Clear All Users
+								</button>
+							</div>
+							<div id="formHint" class="hint" aria-live="polite"></div>
+						</form>
+					</section>
+
+					<section class="panel">
+						<h2>Registered Users</h2>
+						<div style="overflow: auto">
+							<table aria-label="Registered users table">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Email</th>
+										<th>Mobile</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody id="usersBody"></tbody>
+							</table>
+							<div id="emptyRow" class="empty" hidden>
+								No users registered yet.
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</main>
+
+		<script>
+			const KEY = "users";
+
+			function getUsers() {
+				try {
+					return JSON.parse(localStorage.getItem(KEY)) || [];
+				} catch {
+					return [];
+				}
+			}
+			function setUsers(arr) {
+				localStorage.setItem(KEY, JSON.stringify(arr));
+			}
+
+			function showHint(msg, type) {
+				const el = document.getElementById("formHint");
+				el.textContent = msg || "";
+				el.className = "hint" + (type ? " " + type : "");
+				if (msg) {
+					clearTimeout(showHint._t);
+					showHint._t = setTimeout(() => {
+						el.textContent = "";
+						el.className = "hint";
+					}, 2500);
+				}
+			}
+
+			function render() {
+				const body = document.getElementById("usersBody");
+				const empty = document.getElementById("emptyRow");
+				const users = getUsers();
+				body.innerHTML = "";
+				if (users.length === 0) {
+					empty.hidden = false;
+					return;
+				}
+				empty.hidden = true;
+				for (const u of users) {
+					const tr = document.createElement("tr");
+					tr.innerHTML = `<td>${escapeHtml(u.name)}</td><td>${escapeHtml(u.email)}</td><td>${escapeHtml(u.mobile)}</td><td><button data-email="${encodeURIComponent(u.email)}" class="danger">Delete</button></td>`;
+					body.appendChild(tr);
+				}
+			}
+
+			function escapeHtml(s) {
+				return s.replace(
+					/[&<>"']/g,
+					(c) =>
+						({
+							"&": "&amp;",
+							"<": "&lt;",
+							">": "&gt;",
+							'"': "&quot;",
+							"'": "&#39;",
+						})[c]
+				);
+			}
+
+			document.addEventListener("DOMContentLoaded", () => {
+				render();
+
+				document.getElementById("regForm").addEventListener("submit", (e) => {
+					e.preventDefault();
+					const name = document.getElementById("name").value.trim();
+					const email = document
+						.getElementById("email")
+						.value.trim()
+						.toLowerCase();
+					const mobile = document.getElementById("mobile").value.trim();
+					const password = document.getElementById("password").value; // Demo only
+
+					// Validations
+					if (!name || !email || !mobile || !password) {
+						showHint("All fields are mandatory.", "error");
+						return;
+					}
+					if (!/^\d{10}$/.test(mobile)) {
+						showHint("Mobile number must be 10 digits.", "error");
+						return;
+					}
+					if (password.length < 6) {
+						showHint("Password must be at least 6 characters.", "error");
+						return;
+					}
+
+					const users = getUsers();
+					if (users.some((u) => u.email === email)) {
+						showHint("Duplicate email not allowed.", "error");
+						return;
+					}
+
+					users.push({ name, email, mobile, password });
+					setUsers(users);
+					render();
+					e.target.reset();
+					showHint("User registered successfully.", "success");
+				});
+
+				document.getElementById("usersBody").addEventListener("click", (e) => {
+					const btn = e.target.closest("button[data-email]");
+					if (!btn) return;
+					const email = decodeURIComponent(btn.getAttribute("data-email"));
+					const users = getUsers().filter((u) => u.email !== email);
+					setUsers(users);
+					render();
+					showHint("User deleted.", "success");
+				});
+
+				document.getElementById("clearAll").addEventListener("click", () => {
+					// Clear only our users key to avoid nuking unrelated data in the origin
+					localStorage.removeItem(KEY);
+					render();
+					showHint("All users cleared.", "success");
+				});
+			});
+		</script>
+	</body>
+</html>

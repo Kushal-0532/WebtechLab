@@ -1,0 +1,95 @@
+<!-- File: index.html -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Lab 2 - Exercise 1: HTML5 Canvas</title>
+		<style>
+			body {
+				margin: 0;
+				min-height: 100vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-family:
+					system-ui,
+					-apple-system,
+					sans-serif;
+				background: linear-gradient(
+					135deg,
+					#1e1b4b 0%,
+					#2e1065 50%,
+					#0f172a 100%
+				);
+				color: #e9ebf1;
+			}
+			canvas {
+				background: #ffffff11;
+				border-radius: 8px;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+				border: 1px solid #ffffff22;
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="500" height="300"
+			>Canvas is not supported by your browser.</canvas
+		>
+
+		<script>
+			const canvas = document.getElementById("myCanvas");
+			const ctx = canvas.getContext("2d");
+
+			// Draw top text centered
+			ctx.font = "24px sans-serif";
+			ctx.fillStyle = "#e9ebf1";
+			ctx.textAlign = "center";
+			ctx.fillText("HTML5 Canvas", canvas.width / 2, 34);
+
+			// Layout for shapes in a horizontal row near the bottom and centered
+			const padding = 30; // space between shapes
+
+			// 1) Filled rectangle
+			const rectW = 100;
+			const rectH = 60;
+
+			// 2) Filled circle
+			const circleRadius = 30;
+
+			// 3) Straight line length
+			const lineLen = 100;
+
+			// compute total width of the group and starting x so the group is centered
+			const groupWidth = rectW + padding + circleRadius * 2 + padding + lineLen;
+			let x = (canvas.width - groupWidth) / 2;
+
+			// position near bottom with a small margin, align centers vertically
+			const marginBottom = 20;
+			const baselineY = canvas.height - marginBottom - rectH / 2; // center line for shapes
+
+			// draw rectangle so its center aligns with baselineY
+			ctx.fillStyle = "#4CAF50";
+			const rectY = baselineY - rectH / 2;
+			ctx.fillRect(x, rectY, rectW, rectH);
+			x += rectW + padding;
+
+			// draw circle centered on baselineY
+			const circleCx = x + circleRadius;
+			const circleCy = baselineY;
+			ctx.fillStyle = "#2196F3";
+			ctx.beginPath();
+			ctx.arc(circleCx, circleCy, circleRadius, 0, Math.PI * 2);
+			ctx.fill();
+			x += circleRadius * 2 + padding;
+
+			// draw a slanted line centered vertically on baselineY
+			ctx.strokeStyle = "#FF5722";
+			ctx.lineWidth = 4;
+			ctx.beginPath();
+			ctx.moveTo(x, baselineY + rectH / 2 - 10); // start a bit below baseline
+			ctx.lineTo(x + lineLen, baselineY - rectH / 2 + 10); // end a bit above baseline
+			ctx.stroke();
+		</script>
+	</body>
+</html>

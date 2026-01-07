@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Lab 2 - Exercise 3: Advanced Drag and Drop Task Manager</title>
+		<style>
+			:root {
+				color-scheme: light dark;
+				--bg: #0b0b10;
+				--card: #15151d;
+				--muted: #8a8fa3;
+				--accent: #5e8bff;
+				--accent-2: #5effc7;
+				--danger: #ff6b6b;
+				--success: #4cd97b;
+			}
+			body {
+				margin: 0;
+				font-family:
+					system-ui,
+					-apple-system,
+					Segoe UI,
+					Roboto,
+					Ubuntu,
+					Cantarell,
+					Arial,
+					"Noto Sans";
+				background: linear-gradient(
+					135deg,
+					#1e1b4b 0%,
+					#2e1065 50%,
+					#0f172a 100%
+				);
+				min-height: 100vh;
+				display: flex;
+				justify-content: center;
+				color: #e9ebf1;
+			}
+			.container {
+				width: 100%;
+				max-width: 1100px;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				padding: 1rem;
+				box-sizing: border-box;
+			}
+			h1 {
+				text-align: center;
+				font-size: clamp(1.6rem, 3vw, 2.1rem);
+				letter-spacing: 0.3px;
+				margin: 0 0 1rem;
+			}
+			.content {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				gap: 1.5rem;
+			}
+			header {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 0.75rem;
+				margin-bottom: 0.5rem;
+			}
+			.add-bar {
+				display: flex;
+				gap: 0.6rem;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: center;
+				padding: 0.75rem 1rem;
+				background: #0f1120;
+				border: 1px solid #ffffff14;
+				border-radius: 0.8rem;
+				box-shadow: 0 6px 18px #00000055;
+			}
+			input[type="text"] {
+				padding: 0.6rem 0.75rem;
+				border-radius: 0.5rem;
+				border: 1px solid #ffffff22;
+				background: #0f1120;
+				color: #e9ebf1;
+				min-width: 240px;
+			}
+			button {
+				padding: 0.55rem 0.9rem;
+				border-radius: 0.5rem;
+				border: 1px solid #ffffff22;
+				background: #101329;
+				color: #e9ebf1;
+				cursor: pointer;
+				transition:
+					transform 0.06s ease,
+					background 0.2s ease;
+			}
+			button:hover {
+				transform: translateY(-1px);
+				background: #13183a;
+			}
+
+			.status {
+				min-height: 1.4rem;
+				margin: 0.1rem 0 1rem;
+				color: var(--muted);
+				text-align: center;
+			}
+			.status.success {
+				color: var(--success);
+			}
+			.status.error {
+				color: var(--danger);
+			}
+
+			.board {
+				display: grid;
+				gap: 1rem;
+				grid-template-columns: repeat(3, 1fr);
+			}
+			.column {
+				background: #0e1022;
+				border: 1px solid #ffffff14;
+				border-radius: 0.8rem;
+				padding: 0.75rem;
+				min-height: 300px;
+				display: flex;
+				flex-direction: column;
+			}
+			.column h2 {
+				margin: 0.25rem 0.25rem 0.5rem;
+				font-size: 1rem;
+				font-weight: 600;
+				color: #d6d9e6;
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+			.col-body {
+				flex: 1;
+				display: grid;
+				gap: 0.65rem;
+				align-content: start;
+				grid-auto-rows: minmax(48px, auto);
+			}
+
+			.card {
+				background: var(--card);
+				border: 1px solid #ffffff14;
+				border-radius: 0.7rem;
+				padding: 0.6rem 0.7rem;
+				box-shadow: 0 6px 18px #00000055;
+				cursor: grab;
+				user-select: none;
+				transition:
+					box-shadow 0.2s ease,
+					transform 0.06s ease;
+			}
+			.card:active {
+				cursor: grabbing;
+				transform: scale(0.995);
+			}
+			.card .title {
+				font-weight: 600;
+				margin-bottom: 0.25rem;
+			}
+			.card .meta {
+				font-size: 0.8rem;
+				color: var(--muted);
+			}
+			.card.completed {
+				background: linear-gradient(160deg, #1a2c22 0%, #16231a 100%);
+				border-color: #2a6a47;
+			}
+
+			.drop-target {
+				outline: 2px dashed #ffffff22;
+				outline-offset: -6px;
+			}
+
+			.pill {
+				display: inline-flex;
+				gap: 0.4rem;
+				border: 1px solid #ffffff18;
+				background: #101329;
+				color: #c9cde0;
+				padding: 0.25rem 0.5rem;
+				border-radius: 999px;
+				font-size: 0.8rem;
+				align-items: center;
+			}
+			.todo {
+				color: #77a2ff;
+				border-color: #77a2ff33;
+				background: #0f1a33;
+			}
+			.prog {
+				color: #ffb347;
+				border-color: #ffb34733;
+				background: #231a0f;
+			}
+			.done {
+				color: #96e6b3;
+				border-color: #96e6b333;
+				background: #0f2318;
+			}
+
+			@media (max-width: 900px) {
+				.board {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<main class="container">
+			<header>
+				<h1>Exercise 3: Advanced Drag & Drop Task Manager</h1>
+				<div class="add-bar" role="form" aria-label="Add Task">
+					<input
+						id="taskInput"
+						type="text"
+						placeholder="e.g., Prepare lab report"
+						aria-label="Task name"
+					/>
+					<button id="addBtn" type="button" aria-label="Add task">
+						Add Task
+					</button>
+				</div>
+			</header>
+			<div id="globalStatus" class="status" aria-live="polite"></div>
+			<div class="content">
+				<section class="board" aria-label="Task board">
+					<div
+						class="column"
+						data-col="todo"
+						aria-label="To Do column"
+						aria-dropeffect="move"
+					>
+						<h2><span class="pill todo">To Do</span></h2>
+						<div class="col-body" id="todo" role="list"></div>
+					</div>
+					<div
+						class="column"
+						data-col="progress"
+						aria-label="In Progress column"
+						aria-dropeffect="move"
+					>
+						<h2><span class="pill prog">In Progress</span></h2>
+						<div class="col-body" id="progress" role="list"></div>
+					</div>
+					<div
+						class="column"
+						data-col="done"
+						aria-label="Completed column"
+						aria-dropeffect="move"
+					>
+						<h2><span class="pill done">Completed</span></h2>
+						<div class="col-body" id="done" role="list"></div>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<script>
+			const $ = (sel, root = document) => root.querySelector(sel);
+			const $$ = (sel, root = document) =>
+				Array.from(root.querySelectorAll(sel));
+
+			function nowStamp() {
+				const d = new Date();
+				return d.toLocaleString();
+			}
+
+			function createCard(title) {
+				const card = document.createElement("article");
+				card.className = "card";
+				card.setAttribute("role", "listitem");
+				card.draggable = true;
+				card.innerHTML = '<div class="title"></div><div class="meta"></div>';
+				$(".title", card).textContent = title.trim();
+				$(".meta", card).textContent = `Added: ${nowStamp()}`;
+				bindCardDnD(card);
+				return card;
+			}
+
+			function bindCardDnD(card) {
+				card.addEventListener("dragstart", (e) => {
+					e.dataTransfer.setData("text/plain", "task");
+					e.dataTransfer.effectAllowed = "move";
+					card.classList.add("dragging");
+					// remember origin for styling on move out of done
+					card.dataset.fromDone = card.classList.contains("completed")
+						? "1"
+						: "";
+				});
+				card.addEventListener("dragend", () => {
+					card.classList.remove("dragging");
+				});
+			}
+
+			function bindColumnDnD(colBody) {
+				let dragCounter = 0;
+				colBody.addEventListener("dragenter", (e) => {
+					e.preventDefault();
+					dragCounter++;
+					colBody.classList.add("drop-target");
+					e.dataTransfer.dropEffect = "move";
+				});
+				colBody.addEventListener("dragover", (e) => {
+					e.preventDefault();
+					e.dataTransfer.dropEffect = "move";
+				});
+				colBody.addEventListener("dragleave", (e) => {
+					dragCounter--;
+					if (dragCounter <= 0) {
+						colBody.classList.remove("drop-target");
+						dragCounter = 0;
+					}
+				});
+				colBody.addEventListener("drop", (e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					dragCounter = 0;
+					colBody.classList.remove("drop-target");
+					const dragging = $(".card.dragging");
+					if (!dragging) return;
+					colBody.appendChild(dragging);
+					const isDone = colBody.id === "done";
+					if (isDone) {
+						dragging.classList.add("completed");
+						announce("Task Completed Successfully", "success");
+					} else {
+						dragging.classList.remove("completed");
+						if (dragging.dataset.fromDone) {
+							announce("Task moved out of Completed", "");
+						}
+					}
+					dragging.dataset.fromDone = "";
+				});
+			}
+
+			function announce(msg, type) {
+				const status = $("#globalStatus");
+				status.textContent = msg || "";
+				status.classList.toggle("success", type === "success");
+				status.classList.toggle("error", type === "error");
+				if (msg) {
+					clearTimeout(announce._t);
+					announce._t = setTimeout(() => {
+						status.textContent = "";
+						status.className = "status";
+					}, 2200);
+				}
+			}
+
+			document.addEventListener("DOMContentLoaded", () => {
+				// Bind columns
+				["todo", "progress", "done"].forEach((id) =>
+					bindColumnDnD(document.getElementById(id))
+				);
+
+				// Add task
+				$("#addBtn").addEventListener("click", () => {
+					const input = $("#taskInput");
+					const val = input.value.trim();
+					if (!val) {
+						announce("Please enter a task name", "error");
+						return;
+					}
+					const card = createCard(val);
+					$("#todo").appendChild(card);
+					input.value = "";
+					input.focus();
+				});
+
+				// Enter key to add
+				$("#taskInput").addEventListener("keydown", (e) => {
+					if (e.key === "Enter") {
+						$("#addBtn").click();
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Lab 2 - Exercise 2: HTML5 Audio and Video</title>
+		<style>
+			:root {
+				color-scheme: light dark;
+			}
+			body {
+				margin: 0;
+				min-height: 100vh;
+				display: flex;
+				justify-content: center;
+				background: linear-gradient(
+					135deg,
+					#1e1b4b 0%,
+					#2e1065 50%,
+					#0f172a 100%
+				);
+				font-family:
+					system-ui,
+					-apple-system,
+					Segoe UI,
+					Roboto,
+					Ubuntu,
+					Cantarell,
+					"Helvetica Neue",
+					Arial,
+					"Noto Sans",
+					sans-serif;
+				color: #e9ebf1;
+			}
+			.container {
+				width: 100%;
+				max-width: 900px;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				padding: 2rem;
+				box-sizing: border-box;
+			}
+			.content {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				gap: 2rem;
+			}
+			h1 {
+				text-align: center;
+				font-size: clamp(1.6rem, 3vw, 2.1rem);
+				letter-spacing: 0.3px;
+				margin: 0 0 1.5rem;
+			}
+			section {
+				margin: 2rem 0;
+			}
+			.player {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+				align-items: start;
+			}
+			.controls {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				flex-wrap: wrap;
+			}
+			.status {
+				font-variant-numeric: tabular-nums;
+				opacity: 0.9;
+			}
+			button {
+				padding: 0.4rem 0.8rem;
+				border: 1px solid #8883;
+				border-radius: 0.4rem;
+				background: #eee;
+				color: #111;
+			}
+			@media (prefers-color-scheme: dark) {
+				button {
+					background: #222;
+					color: #fafafa;
+					border-color: #ffffff22;
+				}
+			}
+			input[type="range"] {
+				vertical-align: middle;
+			}
+			video,
+			audio {
+				max-width: 100%;
+			}
+			label {
+				display: inline-flex;
+				gap: 0.4rem;
+				align-items: center;
+			}
+		</style>
+	</head>
+	<body>
+		<main class="container">
+			<h1>Exercise 2: HTML5 Audio and Video</h1>
+			<div class="content">
+				<section aria-labelledby="audio-heading">
+					<h2 id="audio-heading">Audio Player</h2>
+					<div class="player">
+						<audio
+							id="audio"
+							controls
+							preload="metadata"
+							aria-describedby="audio-time"
+						>
+							<source
+								src="https://www.w3schools.com/html/horse.mp3"
+								type="audio/mpeg"
+							/>
+							Your browser does not support the audio element.
+						</audio>
+						<div class="controls">
+							<button id="audioPlay" type="button" aria-label="Play audio">
+								Play
+							</button>
+							<button id="audioPause" type="button" aria-label="Pause audio">
+								Pause
+							</button>
+							<label for="audioVol"
+								>Volume
+								<input
+									id="audioVol"
+									type="range"
+									min="0"
+									max="100"
+									value="100"
+								/>
+							</label>
+						</div>
+						<div class="status" id="audio-time">
+							Current time: <span id="audioTime">0:00</span>
+						</div>
+					</div>
+				</section>
+
+				<section aria-labelledby="video-heading">
+					<h2 id="video-heading">Video Player</h2>
+					<div class="player">
+						<video
+							id="video"
+							controls
+							preload="metadata"
+							width="640"
+							aria-describedby="video-time"
+						>
+							<source
+								src="https://www.w3schools.com/html/mov_bbb.mp4"
+								type="video/mp4"
+							/>
+							Your browser does not support the video tag.
+						</video>
+						<div class="controls">
+							<button id="videoPlay" type="button" aria-label="Play video">
+								Play
+							</button>
+							<button id="videoPause" type="button" aria-label="Pause video">
+								Pause
+							</button>
+							<label for="videoVol"
+								>Volume
+								<input
+									id="videoVol"
+									type="range"
+									min="0"
+									max="100"
+									value="100"
+								/>
+							</label>
+						</div>
+						<div class="status" id="video-time">
+							Current time: <span id="videoTime">0:00</span>
+						</div>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<script>
+			function formatTime(seconds) {
+				if (!isFinite(seconds)) return "0:00";
+				const s = Math.floor(seconds % 60)
+					.toString()
+					.padStart(2, "0");
+				const mAll = Math.floor(seconds / 60);
+				const h = Math.floor(mAll / 60);
+				const m = (mAll % 60).toString().padStart(h ? 2 : 1, "0");
+				return h ? `${h}:${m}:${s}` : `${m}:${s}`;
+			}
+
+			function bindMediaControls(
+				media,
+				{ playBtn, pauseBtn, volSlider, timeOut }
+			) {
+				const updateTime = () => {
+					timeOut.textContent = formatTime(media.currentTime || 0);
+				};
+				media.addEventListener("timeupdate", updateTime);
+				media.addEventListener("seeked", updateTime);
+				media.addEventListener("loadedmetadata", updateTime);
+				media.addEventListener("play", updateTime);
+				media.addEventListener("pause", updateTime);
+				updateTime();
+
+				playBtn.addEventListener("click", () => media.play());
+				pauseBtn.addEventListener("click", () => media.pause());
+				volSlider.addEventListener("input", () => {
+					media.volume = Math.min(1, Math.max(0, volSlider.value / 100));
+				});
+			}
+
+			document.addEventListener("DOMContentLoaded", () => {
+				const audio = document.getElementById("audio");
+				bindMediaControls(audio, {
+					playBtn: document.getElementById("audioPlay"),
+					pauseBtn: document.getElementById("audioPause"),
+					volSlider: document.getElementById("audioVol"),
+					timeOut: document.getElementById("audioTime"),
+				});
+
+				const video = document.getElementById("video");
+				bindMediaControls(video, {
+					playBtn: document.getElementById("videoPlay"),
+					pauseBtn: document.getElementById("videoPause"),
+					volSlider: document.getElementById("videoVol"),
+					timeOut: document.getElementById("videoTime"),
+				});
+			});
+		</script>
+	</body>
+</html>
