@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Lab 3 - Exercise 2</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h1>Intelligent Shopping Cart</h1>
+
+			<div class="shop-layout">
+				<div class="products-section">
+					<h2>Available Products</h2>
+					<div id="product-list" class="grid-container">
+						<!-- Products will be rendered here by JS -->
+					</div>
+				</div>
+
+				<div class="cart-section">
+					<h2>Your Cart</h2>
+					<div id="cart-items">
+						<p class="empty-msg">Your cart is empty</p>
+						<!-- Cart items will be rendered here -->
+					</div>
+
+					<div class="coupons">
+						<input
+							type="text"
+							id="coupon-code"
+							placeholder="Enter coupon (e.g., SALE10)"
+						/>
+						<button onclick="applyCoupon()">Apply Coupon</button>
+						<p id="coupon-msg"></p>
+					</div>
+
+					<div class="summary">
+						<div class="summary-row">
+							<span>Subtotal:</span>
+							<span id="subtotal">$0.00</span>
+						</div>
+						<div class="summary-row discount-row">
+							<span>Discounts:</span>
+							<span id="discount-amount">-$0.00</span>
+						</div>
+						<div class="summary-row total-row">
+							<span>Total:</span>
+							<span id="total-price">$0.00</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="script.js"></script>
+	</body>
+</html>

@@ -1,0 +1,236 @@
+body {
+    font-family: 'Rubik', 'Segoe UI', sans-serif;
+    /* Dark Carbon/Zinc Theme */
+    background-color: #09090b;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #09090b,
+        #09090b 10px,
+        #18181b 10px,
+        #18181b 20px
+    );
+    
+    /* UX: Centered Layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #e4e4e7;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    /* Metallic Card */
+    background: linear-gradient(145deg, #18181b, #09090b);
+    padding: 50px 40px;
+    border-radius: 6px;
+    box-shadow: 
+        0 30px 60px -15px rgba(0,0,0,0.8),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    border: 1px solid #27272a;
+    width: 100%;
+    max-width: 500px; /* Optimal width for forms */
+    position: relative;
+    overflow: hidden;
+    
+    /* UX: Min height to prevent jumping */
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Bar */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: #ef4444; 
+    box-shadow: 0 0 15px #ef4444;
+    z-index: 20;
+}
+
+.progress-container {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: #27272a;
+    z-index: 10;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #ef4444;
+    width: 25%;
+    transition: width 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    box-shadow: 0 0 10px #ef4444;
+}
+
+h1 {
+    text-align: center;
+    color: #f4f4f5;
+    font-size: 1.6em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #27272a;
+    padding-bottom: 15px;
+}
+
+h2 {
+    font-size: 1.2em;
+    color: #a1a1aa;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+/* Main Form Area takes available space */
+form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.stage {
+    animation: slideIn 0.3s ease-out;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden { display: none; }
+
+.form-group { margin-bottom: 25px; }
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #d4d4d8;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 16px;
+    background: #000;
+    border: 1px solid #3f3f46;
+    color: #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1.05rem;
+    transition: all 0.2s;
+}
+
+input:focus, select:focus {
+    background: #18181b;
+    outline: none;
+    border-color: #ef4444;
+    box-shadow: -4px 0 0 #ef4444; 
+}
+
+input.invalid, select.invalid {
+    border-color: #b91c1c;
+    background: #1a0505;
+}
+
+.error {
+    display: none;
+    color: #ef4444;
+    font-size: 0.85em;
+    margin-top: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+input.invalid + .error, select.invalid + .error, #terms.invalid ~ #terms-error {
+    display: block;
+}
+
+/* UX: Buttons pushed to bottom */
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto; /* Pushes to bottom */
+    gap: 20px;
+    border-top: 1px solid #27272a;
+    padding-top: 30px;
+}
+
+.btn-group.right { justify-content: flex-end; }
+
+button {
+    padding: 14px 30px;
+    border: none;
+    background: #27272a;
+    color: white;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    border: 1px solid #3f3f46;
+    border-radius: 4px;
+}
+
+button.secondary {
+    background: transparent;
+    color: #a1a1aa;
+}
+
+button.secondary:hover {
+    color: white;
+    border-color: white;
+    background: rgba(255,255,255,0.05);
+}
+
+button[onclick="nextStage()"], button[type="submit"] {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #000;
+}
+
+button[onclick="nextStage()"]:hover, button[type="submit"]:hover {
+    background: #dc2626;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+    transform: translateY(-1px);
+}
+
+button:active { transform: translateY(0); }
+
+#summary-content {
+    background: #09090b;
+    padding: 25px;
+    border: 1px solid #27272a;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+#summary-content p {
+    margin: 15px 0;
+    border-bottom: 1px solid #27272a;
+    padding-bottom: 10px;
+    color: #d4d4d8;
+    display: flex;
+    justify-content: space-between;
+}
+
+#summary-content strong {
+    color: #71717a;
+    font-weight: normal;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Lab 3 - Exercise 4</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="layout">
+			<div class="monitor-panel">
+				<h2>Real-Time Activity Log</h2>
+				<div class="controls">
+					<button onclick="resetLog()">Reset Log</button>
+					<button onclick="exportLog()">Export Log</button>
+				</div>
+				<div id="log-display">
+					<!-- Logs appear here -->
+				</div>
+				<div id="suspicious-alert" class="alert hidden">
+					⚠️ Suspicious Activity Detected: High Click Rate!
+				</div>
+			</div>
+
+			<div class="playground">
+				<h1>Activity Playground</h1>
+				<p>Interact with this area to generate events.</p>
+
+				<div class="interaction-zone">
+					<input
+						type="text"
+						placeholder="Type something here..."
+						class="tracker-input"
+					/>
+					<button id="click-btn">Click Me!</button>
+					<div class="box" tabindex="0">Focusable Box</div>
+
+					<div style="margin-top: 20px; border: 1px dashed #ccc; padding: 10px">
+						<h3>Nested Element Test (Bubbling)</h3>
+						<div id="parent-div" style="padding: 10px; background: #e0e0e0">
+							Parent Div
+							<button id="child-btn">Child Button</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="script.js"></script>
+	</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Lab 3 - Exercise 5</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="progress-container">
+				<div class="progress-bar" id="progress-bar"></div>
+			</div>
+
+			<h1>Registration Workflow</h1>
+
+			<form id="multi-step-form" novalidate>
+				<!-- Stage 1: Account Info -->
+				<div class="stage" id="stage-1">
+					<h2>Step 1: Account Info</h2>
+					<div class="form-group">
+						<label>Username</label>
+						<input type="text" id="username" required minlength="4" />
+						<span class="error">Min 4 chars required</span>
+					</div>
+					<div class="form-group">
+						<label>Email</label>
+						<input type="email" id="email" required />
+						<span class="error">Valid email required</span>
+					</div>
+					<div class="btn-group right">
+						<button type="button" onclick="nextStage()">Next &rarr;</button>
+					</div>
+				</div>
+
+				<!-- Stage 2: Personal Info -->
+				<div class="stage hidden" id="stage-2">
+					<h2>Step 2: Personal Info</h2>
+					<div class="form-group">
+						<label>Full Name</label>
+						<input type="text" id="fullname" required />
+						<span class="error">Name is required</span>
+					</div>
+					<div class="form-group">
+						<label>Phone</label>
+						<input
+							type="tel"
+							id="phone"
+							pattern="[0-9]{10}"
+							placeholder="1234567890"
+						/>
+						<span class="error">10 digit number required</span>
+					</div>
+					<div class="btn-group">
+						<button type="button" class="secondary" onclick="prevStage()">
+							&larr; Back
+						</button>
+						<button type="button" onclick="nextStage()">Next &rarr;</button>
+					</div>
+				</div>
+
+				<!-- Stage 3: Preferences -->
+				<div class="stage hidden" id="stage-3">
+					<h2>Step 3: Preferences</h2>
+					<div class="form-group">
+						<label>Notification Method</label>
+						<select id="notification">
+							<option value="">Select...</option>
+							<option value="email">Email</option>
+							<option value="sms">SMS</option>
+						</select>
+						<span class="error">Please select one</span>
+					</div>
+					<div class="form-group">
+						<label>
+							<input type="checkbox" id="terms" /> I agree to terms & conditions
+						</label>
+						<span class="error" id="terms-error"
+							>You must agree to continue</span
+						>
+					</div>
+					<div class="btn-group">
+						<button type="button" class="secondary" onclick="prevStage()">
+							&larr; Back
+						</button>
+						<button type="button" onclick="nextStage()">Review &rarr;</button>
+					</div>
+				</div>
+
+				<!-- Stage 4: Review -->
+				<div class="stage hidden" id="stage-4">
+					<h2>Step 4: Review & Submit</h2>
+					<div id="summary-content">
+						<!-- Summary populated by JS -->
+					</div>
+					<div class="btn-group">
+						<button type="button" class="secondary" onclick="prevStage()">
+							&larr; Edit
+						</button>
+						<button type="submit" class="success">Confirm & Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<script src="script.js"></script>
+	</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Lab 3 - Exercise 1</title>
+        <link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<main>
+			<h1>Adaptive Registration System</h1>
+			<p>
+				Validation rules adjust as the role changes (Student, Teacher, Admin).
+			</p>
+
+			<form id="registration-form" novalidate>
+				<div class="field">
+					<label for="name">Full name</label>
+					<input
+						id="name"
+						name="name"
+						type="text"
+						placeholder="Alex Johnson"
+						autocomplete="name"
+					/>
+					<div class="feedback" data-feedback="name"></div>
+				</div>
+
+				<div class="field">
+					<label for="email">Email</label>
+					<input
+						id="email"
+						name="email"
+						type="email"
+						placeholder="you@example.com"
+						autocomplete="email"
+					/>
+					<div class="feedback" data-feedback="email"></div>
+				</div>
+
+				<div class="inline">
+					<div class="field">
+						<label for="password">Password</label>
+						<input
+							id="password"
+							name="password"
+							type="password"
+							placeholder="Create a password"
+							autocomplete="new-password"
+						/>
+						<div class="feedback" data-feedback="password"></div>
+					</div>
+					<div class="field">
+						<label for="confirm">Confirm password</label>
+						<input
+							id="confirm"
+							name="confirm"
+							type="password"
+							placeholder="Repeat password"
+							autocomplete="new-password"
+						/>
+						<div class="feedback" data-feedback="confirm"></div>
+					</div>
+				</div>
+
+				<div class="inline">
+					<div class="field">
+						<label for="age">Age</label>
+						<input
+							id="age"
+							name="age"
+							type="number"
+							min="0"
+							inputmode="numeric"
+							placeholder="18"
+						/>
+						<div class="feedback" data-feedback="age"></div>
+					</div>
+					<div class="field">
+						<label for="role">Role</label>
+						<select id="role" name="role">
+							<option value="">Choose role</option>
+							<option value="student">Student</option>
+							<option value="teacher">Teacher</option>
+							<option value="admin">Admin</option>
+						</select>
+						<div class="feedback" data-feedback="role"></div>
+						<div class="helper" id="role-helper">
+							Pick a role to see tailored rules.
+						</div>
+					</div>
+				</div>
+
+				<div class="field" id="skills-wrapper">
+					<label
+						>Skills <span id="skills-requirement" class="helper"></span
+					></label>
+					<div class="skills" role="group" aria-labelledby="skills-requirement">
+						<label class="chip"
+							><input type="checkbox" name="skills" value="html" /> HTML</label
+						>
+						<label class="chip"
+							><input type="checkbox" name="skills" value="css" /> CSS</label
+						>
+						<label class="chip"
+							><input type="checkbox" name="skills" value="javascript" />
+							JavaScript</label
+						>
+						<label class="chip"
+							><input type="checkbox" name="skills" value="python" />
+							Python</label
+						>
+						<label class="chip"
+							><input type="checkbox" name="skills" value="uiux" /> UI/UX</label
+						>
+						<label class="chip"
+							><input type="checkbox" name="skills" value="devops" />
+							DevOps</label
+						>
+					</div>
+					<div class="feedback" data-feedback="skills"></div>
+				</div>
+
+				<button type="submit" disabled>Submit registration</button>
+				<div id="form-status">Complete the fields to enable submission.</div>
+			</form>
+		</main>
+
+		<script src="script.js"></script>
+	</body>
+</html>

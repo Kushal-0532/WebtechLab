@@ -1,0 +1,197 @@
+body {
+    font-family: 'Exo 2', 'Segoe UI', sans-serif;
+    margin: 0;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    min-height: 100vh;
+    color: #e2e8f0;
+    
+    /* UX: Center vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* Stars background */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px);
+    background-size: 550px 550px, 350px 350px;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px; /* Narrower for better focus */
+    
+    background: rgba(22, 27, 34, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 50px;
+    border-radius: 24px;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+h1 {
+    text-align: center;
+    background: linear-gradient(to right, #fbbf24, #d946ef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 10px 0;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 2rem;
+}
+
+p {
+    text-align: center;
+    color: #94a3b8;
+    margin-bottom: 50px;
+    font-size: 1rem;
+}
+
+.question-group {
+    margin-bottom: 30px;
+    padding: 25px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, background 0.3s;
+}
+
+.question-group:focus-within {
+    background: rgba(255, 255, 255, 0.06);
+    transform: scale(1.02);
+    border-color: #d946ef;
+}
+
+.question-group.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 1px #ef4444;
+}
+
+.question-group.success {
+    border-color: #10b981;
+}
+
+label.q-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #f1f5f9;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+}
+
+.required-mark { color: #fbbf24; }
+
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 16px 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1.05rem;
+    background: rgba(0,0,0,0.3);
+    color: white;
+    transition: all 0.3s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    background: rgba(0,0,0,0.6);
+    border-color: #d946ef;
+    box-shadow: 0 0 0 4px rgba(217, 70, 239, 0.1);
+}
+
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* UX: Larger clickable area for options */
+.option-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    padding: 14px 20px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.option-item:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.option-item:has(input:checked) {
+    background: rgba(217, 70, 239, 0.15);
+    border-color: #d946ef;
+    color: #fff;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #d946ef;
+    margin: 0;
+}
+
+.error-message {
+    display: none;
+    color: #ef4444;
+    font-size: 0.95em;
+    margin-top: 15px;
+    font-weight: 500;
+    align-items: center;
+    gap: 8px;
+}
+.error-message::before { content: "⚠"; }
+.question-group.error .error-message { display: flex; }
+
+button {
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(90deg, #d946ef, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 10px 30px -10px rgba(217, 70, 239, 0.5);
+    margin-top: 30px;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -10px rgba(217, 70, 239, 0.6);
+}
+
+button:active { transform: translateY(-1px); }
+
+#form-status {
+    margin-top: 30px;
+    text-align: center;
+    font-weight: 600;
+    padding: 15px;
+    border-radius: 12px;
+}
