@@ -1,0 +1,32 @@
+[
+  {
+    "id": "STU001",
+    "name": "Alice Johnson",
+    "course": "Computer Science",
+    "marks": 92
+  },
+  {
+    "id": "STU002",
+    "name": "Bob Williams",
+    "course": "Mathematics",
+    "marks": 85
+  },
+  {
+    "id": "STU003",
+    "name": "Carol Davis",
+    "course": "Physics",
+    "marks": 78
+  },
+  {
+    "id": "STU004",
+    "name": "David Brown",
+    "course": "Chemistry",
+    "marks": 88
+  },
+  {
+    "id": "STU005",
+    "name": "Emma Wilson",
+    "course": "Biology",
+    "marks": 95
+  }
+]

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Inventory System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📦 Product Inventory System</h1>
+      <p class="subtitle">JSON-Based Inventory Management</p>
+    </header>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Product Form -->
+    <section class="form-section">
+      <h2 id="form-title">Add New Product</h2>
+      <form id="product-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="productId">Product ID</label>
+            <input type="text" id="productId" placeholder="e.g., PRD008" required>
+          </div>
+          <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" placeholder="Enter product name" required>
+          </div>
+          <div class="form-group">
+            <label for="productCategory">Category</label>
+            <select id="productCategory" required>
+              <option value="">Select Category</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Stationery">Stationery</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Food">Food & Beverages</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="productPrice">Price ($)</label>
+            <input type="number" id="productPrice" min="0" step="0.01" placeholder="0.00" required>
+          </div>
+          <div class="form-group">
+            <label for="productStock">Stock Quantity</label>
+            <input type="number" id="productStock" min="0" placeholder="0" required>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submit-btn" class="btn btn-primary">
+            <span class="btn-text">Add Product</span>
+          </button>
+          <button type="button" id="cancel-btn" class="btn btn-secondary" style="display: none;">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Stats Dashboard -->
+    <section class="stats-section">
+      <div class="stat-card highlight">
+        <span class="stat-icon">💰</span>
+        <div class="stat-info">
+          <span class="stat-value" id="total-value">$0</span>
+          <span class="stat-label">Total Inventory Value</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">📦</span>
+        <div class="stat-info">
+          <span class="stat-value" id="total-products">0</span>
+          <span class="stat-label">Total Products</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">📊</span>
+        <div class="stat-info">
+          <span class="stat-value" id="total-stock">0</span>
+          <span class="stat-label">Total Stock</span>
+        </div>
+      </div>
+      <div class="stat-card warning">
+        <span class="stat-icon">⚠️</span>
+        <div class="stat-info">
+          <span class="stat-value" id="low-stock">0</span>
+          <span class="stat-label">Low Stock Items</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters & Search -->
+    <section class="filter-section">
+      <div class="filter-group">
+        <label>Search:</label>
+        <input type="text" id="search-input" placeholder="Search products..." class="search-input">
+      </div>
+      <div class="filter-group">
+        <label>Category:</label>
+        <select id="filter-category">
+          <option value="all">All Categories</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Furniture">Furniture</option>
+          <option value="Stationery">Stationery</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Food">Food & Beverages</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Stock:</label>
+        <select id="filter-stock">
+          <option value="all">All Stock Levels</option>
+          <option value="in-stock">In Stock</option>
+          <option value="low-stock">Low Stock (≤10)</option>
+          <option value="out-of-stock">Out of Stock</option>
+        </select>
+      </div>
+      <button id="refresh-btn" class="btn btn-outline">↻ Refresh</button>
+    </section>
+
+    <!-- Products Table -->
+    <section class="table-section">
+      <div class="table-header">
+        <h2>Inventory List</h2>
+        <span id="result-count" class="result-count"></span>
+      </div>
+      <div class="table-wrapper">
+        <table id="products-table">
+          <thead>
+            <tr>
+              <th>Product ID</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Value</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="products-tbody"></tbody>
+        </table>
+        <div id="loading" class="loading">
+          <div class="spinner"></div>
+          <span>Loading inventory...</span>
+        </div>
+        <div id="empty-state" class="empty-state" style="display: none;">
+          <p>No products found. Add your first product above!</p>
+        </div>
+        <div id="error-state" class="error-state" style="display: none;">
+          <p id="error-message">Error loading data</p>
+          <button class="btn btn-outline" onclick="fetchProducts()">Retry</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Lab 5 - Exercise 4 | Product Inventory System (JSON)</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

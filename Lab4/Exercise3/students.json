@@ -1,0 +1,20 @@
+[
+  {
+    "id": "STU001",
+    "name": "Alice Johnson",
+    "department": "Computer Science",
+    "marks": 92
+  },
+  {
+    "id": "STU002",
+    "name": "Bob Williams",
+    "department": "Electronics",
+    "marks": 85
+  },
+  {
+    "id": "STU003",
+    "name": "Carol Davis",
+    "department": "Mechanical",
+    "marks": 78
+  }
+]

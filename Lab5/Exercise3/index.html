@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Record System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎓 Student Record System</h1>
+      <p class="subtitle">JSON-Based CRUD Operations with Fetch API</p>
+    </header>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Student Form -->
+    <section class="form-section">
+      <h2 id="form-title">Add New Student</h2>
+      <form id="student-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="studentId">Student ID</label>
+            <input type="text" id="studentId" placeholder="e.g., STU006" required>
+            <span class="error-hint" id="id-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="studentName">Name</label>
+            <input type="text" id="studentName" placeholder="Enter full name" required>
+            <span class="error-hint" id="name-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="studentCourse">Course</label>
+            <select id="studentCourse" required>
+              <option value="">Select Course</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Physics">Physics</option>
+              <option value="Chemistry">Chemistry</option>
+              <option value="Biology">Biology</option>
+              <option value="Engineering">Engineering</option>
+            </select>
+            <span class="error-hint" id="course-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="studentMarks">Marks (0-100)</label>
+            <input type="number" id="studentMarks" min="0" max="100" placeholder="Enter marks" required>
+            <span class="error-hint" id="marks-error"></span>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submit-btn" class="btn btn-primary">
+            <span class="btn-text">Add Student</span>
+          </button>
+          <button type="button" id="cancel-btn" class="btn btn-secondary" style="display: none;">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Stats Cards -->
+    <section class="stats-section">
+      <div class="stat-card">
+        <span class="stat-icon">👨‍🎓</span>
+        <div class="stat-info">
+          <span class="stat-value" id="total-students">0</span>
+          <span class="stat-label">Total Students</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">📊</span>
+        <div class="stat-info">
+          <span class="stat-value" id="avg-marks">0</span>
+          <span class="stat-label">Average Marks</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🏆</span>
+        <div class="stat-info">
+          <span class="stat-value" id="highest-marks">0</span>
+          <span class="stat-label">Highest Marks</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">✅</span>
+        <div class="stat-info">
+          <span class="stat-value" id="pass-rate">0%</span>
+          <span class="stat-label">Pass Rate</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Students Table -->
+    <section class="table-section">
+      <div class="table-header">
+        <h2>Student Records</h2>
+        <div class="table-actions">
+          <input type="text" id="search-input" placeholder="Search students..." class="search-input">
+          <button id="refresh-btn" class="btn btn-outline">↻ Refresh</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table id="students-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Course</th>
+              <th>Marks</th>
+              <th>Grade</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="students-tbody"></tbody>
+        </table>
+        <div id="loading" class="loading">
+          <div class="spinner"></div>
+          <span>Loading students...</span>
+        </div>
+        <div id="empty-state" class="empty-state" style="display: none;">
+          <p>No students found. Add your first student above!</p>
+        </div>
+        <div id="error-state" class="error-state" style="display: none;">
+          <p id="error-message">Error loading data</p>
+          <button class="btn btn-outline" onclick="fetchStudents()">Retry</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Lab 5 - Exercise 3 | Student Record System (JSON)</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

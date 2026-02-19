@@ -1,0 +1,51 @@
+[
+  {
+    "id": "PRD001",
+    "name": "Wireless Mouse",
+    "category": "Electronics",
+    "price": 29.99,
+    "stock": 150
+  },
+  {
+    "id": "PRD002",
+    "name": "USB-C Hub",
+    "category": "Electronics",
+    "price": 49.99,
+    "stock": 75
+  },
+  {
+    "id": "PRD003",
+    "name": "Office Chair",
+    "category": "Furniture",
+    "price": 199.99,
+    "stock": 25
+  },
+  {
+    "id": "PRD004",
+    "name": "Desk Lamp",
+    "category": "Furniture",
+    "price": 34.99,
+    "stock": 8
+  },
+  {
+    "id": "PRD005",
+    "name": "Notebook Set",
+    "category": "Stationery",
+    "price": 12.99,
+    "stock": 200
+  },
+  {
+    "id": "PRD006",
+    "name": "Mechanical Keyboard",
+    "category": "Electronics",
+    "price": 89.99,
+    "stock": 3
+  },
+  {
+    "id": "PRD007",
+    "name": "Monitor Stand",
+    "category": "Furniture",
+    "price": 59.99,
+    "stock": 0
+  }
+]

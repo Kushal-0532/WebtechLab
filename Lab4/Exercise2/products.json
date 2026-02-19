@@ -1,0 +1,10 @@
+[
+  { "id": 1, "name": "Minimalist Desk Lamp", "price": 45.00, "category": "Home Office" },
+  { "id": 2, "name": "Ergonomic Mechanical Keyboard", "price": 120.00, "category": "Accessories" },
+  { "id": 3, "name": "Leather Laptop Sleeve", "price": 35.00, "category": "Accessories" },
+  { "id": 4, "name": "Acoustic Noise-Cancelling Headphones", "price": 250.00, "category": "Audio" },
+  { "id": 5, "name": "Smart Water Bottle", "price": 25.00, "category": "Lifestyle" },
+  { "id": 6, "name": "Bamboo Standing Desk", "price": 450.00, "category": "Furniture" },
+  { "id": 7, "name": "Wireless Charging Pad", "price": 15.00, "category": "Accessories" },
+  { "id": 8, "name": "Portable Power Bank", "price": 40.00, "category": "Tech" }
+]

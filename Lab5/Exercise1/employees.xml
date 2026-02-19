@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employees>
+  <employee>
+    <id>EMP001</id>
+    <name>John Smith</name>
+    <department>Engineering</department>
+    <salary>75000</salary>
+  </employee>
+  <employee>
+    <id>EMP002</id>
+    <name>Sarah Johnson</name>
+    <department>Marketing</department>
+    <salary>65000</salary>
+  </employee>
+  <employee>
+    <id>EMP003</id>
+    <name>Michael Brown</name>
+    <department>Finance</department>
+    <salary>80000</salary>
+  </employee>
+  <employee>
+    <id>EMP004</id>
+    <name>Emily Davis</name>
+    <department>Human Resources</department>
+    <salary>55000</salary>
+  </employee>
+</employees>

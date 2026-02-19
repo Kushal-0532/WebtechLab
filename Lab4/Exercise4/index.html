@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Weather Dashboard</h1>
+      <p class="subtitle">Get real-time weather information for any city</p>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+      <form id="search-form">
+        <div class="search-box">
+          <input 
+            type="text" 
+            id="city-input" 
+            placeholder="Enter city name..." 
+            autocomplete="off"
+            required
+          >
+          <button type="submit" id="search-btn">
+            <span class="btn-text">Search</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </div>
+      </form>
+      <p id="cached-info" class="cached-info"></p>
+    </section>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading" style="display: none;">
+      <div class="spinner"></div>
+      <span>Fetching weather data...</span>
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-message" class="error-message" style="display: none;">
+      <div class="error-icon">!</div>
+      <p id="error-text"></p>
+      <button id="retry-btn" class="btn-retry">Try Again</button>
+    </div>
+
+    <!-- Weather Card -->
+    <section id="weather-card" class="weather-card" style="display: none;">
+      <div class="weather-main">
+        <div class="weather-icon-container">
+          <img id="weather-icon" src="" alt="Weather icon" class="weather-icon">
+          <p id="weather-condition" class="weather-condition"></p>
+        </div>
+        <div class="temperature-container">
+          <h2 id="temperature" class="temperature"></h2>
+          <p id="feels-like" class="feels-like"></p>
+        </div>
+      </div>
+
+      <div class="location-info">
+        <h3 id="city-name" class="city-name"></h3>
+        <p id="country" class="country"></p>
+        <p id="date-time" class="date-time"></p>
+      </div>
+
+      <div class="weather-details">
+        <div class="detail-item">
+          <div class="detail-icon">💧</div>
+          <div class="detail-info">
+            <span class="detail-value" id="humidity"></span>
+            <span class="detail-label">Humidity</span>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">💨</div>
+          <div class="detail-info">
+            <span class="detail-value" id="wind-speed"></span>
+            <span class="detail-label">Wind Speed</span>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">👁</div>
+          <div class="detail-info">
+            <span class="detail-value" id="visibility"></span>
+            <span class="detail-label">Visibility</span>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">🌡</div>
+          <div class="detail-info">
+            <span class="detail-value" id="pressure"></span>
+            <span class="detail-label">Pressure</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sun-times">
+        <div class="sun-item">
+          <span class="sun-icon">🌅</span>
+          <span class="sun-label">Sunrise</span>
+          <span id="sunrise" class="sun-value"></span>
+        </div>
+        <div class="sun-item">
+          <span class="sun-icon">🌇</span>
+          <span class="sun-label">Sunset</span>
+          <span id="sunset" class="sun-value"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Initial State -->
+    <section id="initial-state" class="initial-state">
+      <div class="initial-icon">🌤</div>
+      <p>Enter a city name above to get weather information</p>
+    </section>
+
+    <footer>
+      <p>Lab 4 - Exercise 4 | Weather Dashboard using OpenWeather API</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

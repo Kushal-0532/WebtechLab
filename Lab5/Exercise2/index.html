@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Book Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📚 Library Book Tracker</h1>
+      <p class="subtitle">XML DOM Manipulation</p>
+    </header>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Book Form -->
+    <section class="form-section">
+      <h2 id="form-title">Add New Book</h2>
+      <form id="book-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="bookId">Book ID</label>
+            <input type="text" id="bookId" placeholder="e.g., BK006" required>
+          </div>
+          <div class="form-group">
+            <label for="bookTitle">Title</label>
+            <input type="text" id="bookTitle" placeholder="Enter book title" required>
+          </div>
+          <div class="form-group">
+            <label for="bookAuthor">Author</label>
+            <input type="text" id="bookAuthor" placeholder="Enter author name" required>
+          </div>
+          <div class="form-group">
+            <label for="bookStatus">Availability</label>
+            <select id="bookStatus" required>
+              <option value="available">Available</option>
+              <option value="borrowed">Borrowed</option>
+              <option value="reserved">Reserved</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submit-btn" class="btn btn-primary">
+            <span class="btn-text">Add Book</span>
+          </button>
+          <button type="button" id="cancel-btn" class="btn btn-secondary" style="display: none;">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Filter & Stats -->
+    <section class="filter-section">
+      <div class="filter-group">
+        <label>Filter by Status:</label>
+        <select id="filter-status">
+          <option value="all">All Books</option>
+          <option value="available">Available</option>
+          <option value="borrowed">Borrowed</option>
+          <option value="reserved">Reserved</option>
+        </select>
+      </div>
+      <div class="stats-row">
+        <span class="stat-badge available"><span id="available-count">0</span> Available</span>
+        <span class="stat-badge borrowed"><span id="borrowed-count">0</span> Borrowed</span>
+        <span class="stat-badge reserved"><span id="reserved-count">0</span> Reserved</span>
+      </div>
+    </section>
+
+    <!-- Books Table -->
+    <section class="table-section">
+      <div class="table-header">
+        <h2>Book Collection</h2>
+        <button id="refresh-btn" class="btn btn-outline">↻ Refresh</button>
+      </div>
+      <div class="table-wrapper">
+        <table id="books-table">
+          <thead>
+            <tr>
+              <th>Book ID</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="books-tbody"></tbody>
+        </table>
+        <div id="loading" class="loading">
+          <div class="spinner"></div>
+          <span>Loading books...</span>
+        </div>
+        <div id="empty-state" class="empty-state" style="display: none;">
+          <p>No books found. Add your first book above!</p>
+        </div>
+        <div id="error-state" class="error-state" style="display: none;">
+          <p id="error-message">Error loading data</p>
+          <button class="btn btn-outline" onclick="fetchBooks()">Retry</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- XML Preview -->
+    <section class="xml-preview">
+      <div class="preview-header">
+        <h3>XML Data Preview</h3>
+        <button id="toggle-xml" class="btn btn-outline btn-sm">Show XML</button>
+      </div>
+      <pre id="xml-content" class="xml-content" style="display: none;"></pre>
+    </section>
+
+    <footer>
+      <p>Lab 5 - Exercise 2 | Library Book Tracker (XML)</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Search | Minimalist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Discover.</h1>
+            <p>Find what you need, instantly.</p>
+        </header>
+
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" placeholder="Search products..." autocomplete="off">
+            <div id="loader" class="loader hidden"></div>
+        </div>
+
+        <main id="resultsGrid" class="results-grid">
+            <!-- Results will be injected here -->
+        </main>
+
+        <template id="productTemplate">
+            <div class="product-card">
+                <div class="product-info">
+                    <span class="category"></span>
+                    <h3 class="name"></h3>
+                    <p class="price"></p>
+                </div>
+            </div>
+        </template>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
