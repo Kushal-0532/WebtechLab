@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Book Finder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Online Book Finder</h1>
+      <p class="subtitle">MongoDB Retrieval &amp; Query Operations</p>
+    </header>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Controls -->
+    <section class="controls-section">
+      <!-- Search -->
+      <div class="control-group search-group">
+        <label>Search by Title</label>
+        <div class="search-row">
+          <input type="text" id="search-input" placeholder="e.g., JavaScript...">
+          <button class="btn btn-primary" onclick="searchBooks()">Search</button>
+        </div>
+      </div>
+
+      <!-- Filter by category -->
+      <div class="control-group">
+        <label>Filter by Category</label>
+        <div class="search-row">
+          <select id="category-select">
+            <option value="">All Categories</option>
+          </select>
+          <button class="btn btn-primary" onclick="filterByCategory()">Filter</button>
+        </div>
+      </div>
+
+      <!-- Sort -->
+      <div class="control-group">
+        <label>Sort Books</label>
+        <div class="btn-row">
+          <button class="btn btn-outline" onclick="sortBooks('price')">Sort by Price ↑</button>
+          <button class="btn btn-outline" onclick="sortBooks('rating')">Sort by Rating ↓</button>
+        </div>
+      </div>
+
+      <!-- Special -->
+      <div class="control-group">
+        <label>Quick Views</label>
+        <div class="btn-row">
+          <button class="btn btn-outline" onclick="loadTopRated()">Top Rated</button>
+          <button class="btn btn-outline" onclick="loadAll()">All Books</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section">
+      <div class="stat-card">
+        <span class="stat-value" id="result-count">0</span>
+        <span class="stat-label">Books Shown</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="mode-label">All</span>
+        <span class="stat-label">Current View</span>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="table-section">
+      <div class="table-header">
+        <h2 id="results-title">All Books</h2>
+      </div>
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <span>Loading books...</span>
+      </div>
+      <div id="books-grid" class="books-grid" style="display: none;"></div>
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <p>No books found matching your query.</p>
+      </div>
+      <!-- Pagination -->
+      <div id="pagination" class="pagination" style="display: none;">
+        <button id="prev-btn" class="btn btn-outline" onclick="changePage(-1)">&#8592; Prev</button>
+        <span id="page-info" class="page-info"></span>
+        <button id="next-btn" class="btn btn-outline" onclick="changePage(1)">Next &#8594;</button>
+      </div>
+    </section>
+
+    <footer>
+      <p>Lab 7 - Exercise 2 | Online Book Finder (MongoDB)</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "online-book-finder",
+  "version": "1.0.0",
+  "description": "Lab 7 - Exercise 2: Online Book Finder with MongoDB queries",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0"
+  }
+}

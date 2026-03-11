@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Notes Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Student Notes Manager</h1>
+      <p class="subtitle">MongoDB CRUD Operations</p>
+    </header>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Note Form -->
+    <section class="form-section">
+      <h2 id="form-title">Add New Note</h2>
+      <form id="note-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" placeholder="e.g., MongoDB Basics" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" placeholder="e.g., Database" required>
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <label for="description">Description</label>
+          <textarea id="description" rows="4" placeholder="Enter your study notes here..." required></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submit-btn" class="btn btn-primary">
+            <span class="btn-text">Add Note</span>
+          </button>
+          <button type="button" id="cancel-btn" class="btn btn-secondary" style="display: none;">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section">
+      <div class="stat-card">
+        <span class="stat-value" id="total-notes">0</span>
+        <span class="stat-label">Total Notes</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="total-subjects">0</span>
+        <span class="stat-label">Subjects</span>
+      </div>
+    </section>
+
+    <!-- Notes List -->
+    <section class="table-section">
+      <div class="table-header">
+        <h2>All Notes</h2>
+        <button id="refresh-btn" class="btn btn-outline">↻ Refresh</button>
+      </div>
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <span>Loading notes...</span>
+      </div>
+      <div id="notes-grid" class="notes-grid" style="display: none;"></div>
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <p>No notes yet. Add your first study note above!</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Lab 7 - Exercise 1 | Student Notes Manager (MongoDB)</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

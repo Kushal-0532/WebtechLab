@@ -1,0 +1,13 @@
+{
+  "name": "student-notes-manager",
+  "version": "1.0.0",
+  "description": "Lab 7 - Exercise 1: Student Notes Manager with MongoDB CRUD",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0"
+  }
+}
