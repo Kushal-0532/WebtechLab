@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 1 – Variables, Arrow Functions & Template Literals</title>
+</head>
+<body>
+  <h2>Exercise 1 – ES6 Variables, Arrow Functions &amp; Template Literals</h2>
+  <button onclick="runExercise()">Run</button>
+
+  <div id="output" style="display:none; margin-top:1rem;">
+    <p><strong>Student Name:</strong> <span id="out-name"></span></p>
+    <p><strong>Marks:</strong></p>
+    <ul id="out-marks"></ul>
+    <p><strong>Total Marks:</strong> <span id="out-total"></span></p>
+    <p><strong>Average Marks:</strong> <span id="out-avg"></span></p>
+  </div>
+
+  <script>
+    function runExercise() {
+      const studentName = prompt("Enter student name:");
+      if (studentName === null) return;
+
+      const marksInput = prompt("Enter marks separated by commas (e.g. 85, 90, 88):");
+      if (marksInput === null) return;
+
+      // const and let
+      const name = studentName.trim();
+      let marks = marksInput.split(",").map(m => parseFloat(m.trim())).filter(m => !isNaN(m));
+
+      if (marks.length === 0) { alert("No valid marks entered."); return; }
+
+      // Arrow function
+      const calculateAverage = (arr) => {
+        const sum = arr.reduce((acc, m) => acc + m, 0);
+        return (sum / arr.length).toFixed(2);
+      };
+
+      const total   = marks.reduce((acc, m) => acc + m, 0);
+      const average = calculateAverage(marks);
+
+      // Template literal
+      document.getElementById("out-name").textContent  = `${name}`;
+      document.getElementById("out-total").textContent = `${total}`;
+      document.getElementById("out-avg").textContent   = `${average}`;
+
+      const list = document.getElementById("out-marks");
+      list.innerHTML = "";
+      marks.forEach((m, i) => {
+        const li = document.createElement("li");
+        li.textContent = `Subject ${i + 1}: ${m}`;
+        list.appendChild(li);
+      });
+
+      document.getElementById("output").style.display = "block";
+    }
+  </script>
+</body>
+</html>

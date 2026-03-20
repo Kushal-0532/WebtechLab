@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 2 – Object Destructuring & Spread Operator</title>
+</head>
+<body>
+  <h2>Exercise 2 – ES6 Object Destructuring &amp; Spread Operator</h2>
+  <button onclick="runExercise()">Run</button>
+
+  <div id="output" style="display:none; margin-top:1rem;">
+    <h3>Destructured Values</h3>
+    <p><strong>ID:</strong> <span id="out-id"></span></p>
+    <p><strong>Name:</strong> <span id="out-name"></span></p>
+    <p><strong>Department:</strong> <span id="out-dept"></span></p>
+    <p><strong>Marks:</strong></p>
+    <ul id="out-marks"></ul>
+    <p><strong>Total Marks:</strong> <span id="out-total"></span></p>
+
+    <h3>Updated Object (via Spread)</h3>
+    <p><strong>ID:</strong> <span id="upd-id"></span></p>
+    <p><strong>Name:</strong> <span id="upd-name"></span></p>
+    <p><strong>Department:</strong> <span id="upd-dept"></span></p>
+    <p><strong>Marks:</strong></p>
+    <ul id="upd-marks"></ul>
+    <p><strong>Total Marks:</strong> <span id="upd-total"></span></p>
+    <p><strong>Grade:</strong> <span id="upd-grade"></span></p>
+  </div>
+
+  <script>
+    function runExercise() {
+      const idInput     = prompt("Enter student ID:");
+      if (idInput === null) return;
+      const nameInput   = prompt("Enter student name:");
+      if (nameInput === null) return;
+      const deptInput   = prompt("Enter department:");
+      if (deptInput === null) return;
+      const marksInput  = prompt("Enter marks separated by commas (e.g. 85, 90, 88):");
+      if (marksInput === null) return;
+
+      // Original object
+      const student = {
+        id:         parseInt(idInput) || 0,
+        name:       nameInput.trim(),
+        department: deptInput.trim(),
+        marks:      marksInput.split(",").map(m => parseFloat(m.trim())).filter(m => !isNaN(m))
+      };
+
+      // Object destructuring
+      const { id, name, department, marks } = student;
+
+      const total = marks.reduce((acc, m) => acc + m, 0);
+      const avg   = total / marks.length;
+      const grade = avg >= 90 ? "A" : avg >= 80 ? "B" : avg >= 70 ? "C" : "D";
+
+      // Spread operator
+      const updatedStudent = { ...student, grade };
+
+      // Render destructured values
+      document.getElementById("out-id").textContent    = id;
+      document.getElementById("out-name").textContent  = name;
+      document.getElementById("out-dept").textContent  = department;
+      document.getElementById("out-total").textContent = total;
+
+      const marksList = document.getElementById("out-marks");
+      marksList.innerHTML = "";
+      marks.forEach((m, i) => {
+        const li = document.createElement("li");
+        li.textContent = `Subject ${i + 1}: ${m}`;
+        marksList.appendChild(li);
+      });
+
+      // Render updated object
+      document.getElementById("upd-id").textContent    = updatedStudent.id;
+      document.getElementById("upd-name").textContent  = updatedStudent.name;
+      document.getElementById("upd-dept").textContent  = updatedStudent.department;
+      document.getElementById("upd-total").textContent = total;
+      document.getElementById("upd-grade").textContent = updatedStudent.grade;
+
+      const updMarksList = document.getElementById("upd-marks");
+      updMarksList.innerHTML = "";
+      updatedStudent.marks.forEach((m, i) => {
+        const li = document.createElement("li");
+        li.textContent = `Subject ${i + 1}: ${m}`;
+        updMarksList.appendChild(li);
+      });
+
+      document.getElementById("output").style.display = "block";
+    }
+  </script>
+</body>
+</html>

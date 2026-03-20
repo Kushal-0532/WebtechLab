@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 3 – Classes & Promises</title>
+</head>
+<body>
+  <h2>Exercise 3 – ES6 Classes &amp; Promises</h2>
+  <button onclick="runExercise()">Run</button>
+
+  <div id="output" style="display:none; margin-top:1rem;">
+    <h3>Course Details</h3>
+    <p><strong>Course Name:</strong> <span id="out-course"></span></p>
+    <p><strong>Instructor:</strong> <span id="out-instructor"></span></p>
+    <p><strong>Max Students:</strong> <span id="out-max"></span></p>
+    <p><strong>Currently Enrolled:</strong> <span id="out-enrolled"></span></p>
+
+    <h3>Enrollment Result</h3>
+    <p id="out-status"></p>
+  </div>
+
+  <script>
+    // ES6 Class
+    class Course {
+      constructor(courseName, instructor, maxStudents, enrolledCount) {
+        this.courseName    = courseName;
+        this.instructor    = instructor;
+        this.maxStudents   = maxStudents;
+        this.enrolledCount = enrolledCount;
+      }
+
+      display() {
+        return `${this.courseName} by ${this.instructor} (${this.enrolledCount}/${this.maxStudents})`;
+      }
+    }
+
+    // Promise-based enrollment
+    const enroll = (course, studentName) => {
+      return new Promise((resolve, reject) => {
+        if (course.enrolledCount < course.maxStudents) {
+          course.enrolledCount++;
+          resolve(`Enrollment Successful — ${studentName} enrolled in "${course.courseName}"`);
+        } else {
+          reject(`Course Full — "${course.courseName}" has no available seats`);
+        }
+      });
+    };
+
+    function runExercise() {
+      const courseName    = prompt("Enter course name (e.g. Web Technologies):");
+      if (courseName === null) return;
+      const instructor    = prompt("Enter instructor name (e.g. Dr. Kumar):");
+      if (instructor === null) return;
+      const maxInput      = prompt("Enter maximum students:");
+      if (maxInput === null) return;
+      const enrolledInput = prompt("Enter currently enrolled count:");
+      if (enrolledInput === null) return;
+      const studentName   = prompt("Enter enrolling student's name:");
+      if (studentName === null) return;
+
+      const course = new Course(
+        courseName.trim(),
+        instructor.trim(),
+        parseInt(maxInput)      || 0,
+        parseInt(enrolledInput) || 0
+      );
+
+      document.getElementById("out-course").textContent    = course.courseName;
+      document.getElementById("out-instructor").textContent = course.instructor;
+      document.getElementById("out-max").textContent       = course.maxStudents;
+      document.getElementById("out-enrolled").textContent  = course.enrolledCount;
+
+      enroll(course, studentName.trim())
+        .then(msg => { document.getElementById("out-status").textContent = msg; })
+        .catch(err => { document.getElementById("out-status").textContent = err; });
+
+      document.getElementById("output").style.display = "block";
+    }
+  </script>
+</body>
+</html>
