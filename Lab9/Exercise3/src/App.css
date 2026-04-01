@@ -1,0 +1,48 @@
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.counter-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  padding: 48px 64px;
+  text-align: center;
+}
+
+.counter-card h1 {
+  font-size: 1.8rem;
+  color: #1a1a2e;
+  margin-bottom: 24px;
+}
+
+.counter-value {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #4f8ef7;
+  margin: 0 0 32px;
+}
+
+.counter-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.counter-buttons button {
+  padding: 10px 28px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #4f8ef7;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.counter-buttons button:hover {
+  background-color: #2f6fd4;
+}
